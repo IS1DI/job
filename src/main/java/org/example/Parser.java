@@ -15,7 +15,9 @@ public class Parser {
                 if(isCorrectString(string))
                     outputString.add(string);
             }
-        } catch (Exception e){}
+        } catch (Exception e){
+
+        }
         System.out.println(System.currentTimeMillis()/1000);
         return outputString;
 
@@ -44,6 +46,7 @@ public class Parser {
                 map.get(temp).add(strings.get(i));
             }else{
                 Set<String> set = new HashSet<>();
+                set.add(strings.get(i));
                 map.put(temp,set);
             }
         }

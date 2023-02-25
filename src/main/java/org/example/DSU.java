@@ -22,35 +22,33 @@ public class DSU {
         String[] split = str.split(splitter);
         indexes.add(index);
         parents.add(index);
-        int temp = -1;
         for(int i = 0; i < split.length; i++) {
             if (!isNone(split[i])) {
                 if (strings.containsKey(split[i])) {
                     if (strings.get(split[i]).containsKey(i)) {
-                        if (temp == -1) {
-                            temp = find(strings.get(split[i]).get(i));
-                            indexes.set(index, temp);
+                        if (indexes.get(index) == index) {
+                            indexes.set(index, find(strings.get(split[i]).get(i)));
                             parents.remove(index);
                         } else {
                             //union
                             int parent = find(strings.get(split[i]).get(i));
-                            indexes.set(parent, temp);
+                            indexes.set(parent, find(indexes.get(index)));
                             parents.remove(parent);
                             //union
                         }
                     } else {
-                        if (temp == -1) {
+                        if (indexes.get(index) == index) {
                             strings.get(split[i]).put(i, index);
                         } else {
-                            strings.get(split[i]).put(i, temp);
+                            strings.get(split[i]).put(i, find(indexes.get(index)));
                         }
                     }
                 } else {
                     HashMap<Integer, Integer> map = new HashMap<>();
-                    if (temp == -1) {
+                    if (indexes.get(index)==index) {
                         map.put(i, index);
                     } else {
-                        map.put(i, temp);
+                        map.put(i, find(indexes.get(index)));
                     }
                     strings.put(split[i], map);
                 }
