@@ -18,7 +18,6 @@ public class Parser {
         } catch (Exception e){
 
         }
-        System.out.println(System.currentTimeMillis()/1000);
         return outputString;
 
     }
@@ -37,6 +36,7 @@ public class Parser {
         DSU dsu = new DSU();
         for(int i = 0; i< strings.size(); i++){
             dsu.add(strings.get(i),i);
+
         }
         List<Integer> list = dsu.getList();
         HashMap<Integer,Set<String>> map = new HashMap<>();

@@ -20,12 +20,9 @@ public class Main {
 
 
         ArrayList<Set<String>> list = Parser.group(Parser.parse(file));
-        System.out.println(list.size());
         List<Set<String>> g = list.stream()
                 .sorted((o1, o2) -> Integer.compare(o2.size(), o1.size()))
                 .toList();
-        System.out.println(g.size());
-        System.out.printf("time: %d seconds", (System.currentTimeMillis() - t1) / 1000);
 
         try (FileWriter fileWriter = new FileWriter("test.txt")) {
             fileWriter.write("Количество групп с более чем одним элементом - " + g.stream().filter(x -> x.size() > 1).count() + "\n");
@@ -48,7 +45,7 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        System.out.printf("\ntime: %d seconds", (System.currentTimeMillis() - t1) / 1000);
+        System.out.printf("\ntime: %.4f seconds\nresult: test.txt", (double) (System.currentTimeMillis() - t1) / 1000);
     }
     public static File parseArgs(String[] args) throws FileNotFoundException {
         File file;
