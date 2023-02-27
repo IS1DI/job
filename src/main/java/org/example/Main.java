@@ -29,7 +29,7 @@ public class Main {
             IntStream.range(0, g.size()).forEach(
                     i -> {
                         try {
-                            fileWriter.write("Группа " + i + 1 + "\n");
+                            fileWriter.write("Группа " + (i + 1) + "\n");
                             g.get(i).forEach(x -> {
                                 try {
                                     fileWriter.write(x + "\n");
@@ -49,7 +49,7 @@ public class Main {
     }
     public static File parseArgs(String[] args) throws FileNotFoundException {
         File file;
-        Pattern pattern = Pattern.compile("^.*\\.txt$");
+        Pattern pattern = Pattern.compile("^.*(\\.txt|\\.csv)$");
         file = new File(Arrays.stream(args)
                 .filter(i -> pattern.matcher(i).matches())
                 .findFirst()

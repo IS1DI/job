@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class Parser {
     private static final Pattern pattern = Pattern.compile("^\"[^\"]*\"$");
     private static final String splitter = ";";
+    private static final Pattern isNone = Pattern.compile("\\s*\"+\\s*\"\\s*");
     /*a*/
     public static ArrayList<String> parse(File file) {
         ArrayList<String> outputString = new ArrayList<>();
@@ -22,14 +23,17 @@ public class Parser {
 
     }
     private static boolean isCorrectString(String str){
-
+        boolean flag = true;
         String[] split = str.split(splitter);
         for (String i: split) {
             if(!pattern.matcher(i).matches()){
                 return false;
             }
+            if(flag&&!isNone.matcher(i).matches()){
+                flag = false;
+            }
         }
-        return true;
+        return !flag;
     }
 
     public static ArrayList<Set<String>> group(ArrayList<String> strings){
